@@ -1,45 +1,69 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "A4: Jail Population Report"
+author: "Maggie Liang"
+date: '2022-11-20'
 output: html_document
 ---
 
-```{r echo=FALSE, eval=TRUE, message=FALSE}
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
 source("../source/a4-helpers.R")
 source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
+This report covers some data analysis of US prison population data from 1970 to 2018. For example, the data changes from 1970 to 2018 and after 2000, the total number and average of the prison population in the United States, the gender distribution in prisons, and so on.
 
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
+## Introduction
+Safety is usually one of the survival criteria that cannot be ignored for ordinary people, and the crime situation can represent the safety level of an area on the one hand. For the degree of safety, we usually use the number of crimes in an area as a measure, and at the same time, the statistics of the prison population are also very representative. However, prisons are also one of the places with the worst racism in the United States. The incarceration data we obtained from the Vera Institute includes prison populations of different genders and prison populations of different races. This data can effectively allow us to analyze the trends of gender and race in the prison population, how these trends are related to racism, and even whether there is unfairness because of racism. To answer and summarize these questions, we will provide evidence through data summary and analysis, and also visualize the data to help people discover the relationship and results between the data more simply and clearly. In this data analysis report, various data analysis and visualization skills to expose patterns of inequality will be used.
+
+
+## Data Summary
+#### What is the total number of people in the prison of each State after Year 2000?
+```{r S2.1, echo=FALSE}
+state_total_2000
 ```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
+#### What is the average number of each category after Year 2000?
+```{r S2.2, echo=FALSE}
+category_avg
 ```
 
-## Introduction 
-[TODO]
+#### Which year has the highest number of people in jail, which year has the lowest?
+```{r S2.3, echo=FALSE}
+hi_total
+lo_total
+```
 
-## Data Summary 
-[TODO]
+From the above three questions, we can get the total prison population of each state in the United States after 2000. Among them, the five states of CT, DE, HI, RI, and VT have a prison population of 0 after 2000. We also calculated the average value of each variable after 2000. From the results, it can be concluded that the average number of prison populations for blacks is 91.9, and the average number of prison populations for whites is 109.9. Finally, we calculated in which year the prison population had the largest and smallest values. The result we got is that there was a largest population of 778200 in 2008 and a smallest population of 155679 in 1971.
 
-[TODO ... other sections ... See Canvas for details]
 
-_All the very best with your work!_
+## Growth of the U.S. Prison Population
+```{r S3, echo=FALSE}
+plot_jail_pop_for_us()
+```
 
+From the bar chart, we can see that the jail population did not change much between 1970 and 1980, increased rapidly between 1980 and 2008, and began to decline after reaching its peak in 2008. What causes fluctuations in jail population? Are these fluctuations related to economic and technological growth trends?
+
+
+## Growth of Prison Population by State 
+```{r S4, echo=FALSE}
+state <- c("WA", "CA", "DC", "NY", "TX", "ND")
+plot_jail_pop_for_states(state)
+```
+
+From the line plot, we can see that the jail population in most states has a small annual growth rate, but the jail population in California and Texas has a significant annual growth. In the graph, one state from the east, west, north and south of the United States is selected to observe the trend. Trends in the jail population should have a lot to do with population numbers and trends in population mobility.
+
+
+## Gender Compaison Visualization by Year
+```{r S5, echo=FALSE}
+plot_female_male_year()
+```
+
+What are the relationships and trends of different genders in the jail population? From the bar chart we can see that the number of men in the jail population is far greater than the number of women. Between 1980 and 2008 there was a significant increase in the male jail population while the female jail population grew slowly. However, since 2010, the male jail population has declined significantly while the female jail population has not changed much. But overall the male and female jail populations are growing or shrinking in tandem.
+
+
+## Average Jail Population Map visualization by State
+```{r S6, echo=FALSE}
+us_map()
+```
+
+How is the average jail population distributed on the geographic map? In the geographic map we use shades of color for different states to represent differences in the average jail population. We can clearly find that California has the lightest color which indicate the largest average jail population, and the jail population in the central states is much less than that the jail population in the eastern and western coastal states.
